@@ -1,0 +1,42 @@
+version: '3'
+
+tasks:
+  init:
+    desc: terraform init
+    cmds:
+      - terraform init
+
+  plan:
+    desc: terraform plan
+    cmds:
+      - terraform plan -var-file=zoli.tfvars
+
+
+  apply:
+    desc: terraform apply
+    cmds:
+      - terraform apply -var-file=zoli.tfvars --auto-approve
+
+
+  ws:
+    desc: show worspaces
+    cmds:
+      - terraform workspace list
+
+
+                                                      ++
+
+  astro-np:
+    desc: astro-dev
+    vars:
+      ENV: np
+    cmds:
+      - terraform -chdir=astro  plan  -var-file=../config/{{.ENV}}.tfvars
+
+
+  astro-prod:
+    desc: astro-dev
+    vars:
+      ENV: prod
+    cmds:
+      - terraform -chdir=astro  plan  -var-file=../config/{{.ENV}}.tfvars
